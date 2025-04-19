@@ -1,0 +1,6 @@
+
+
+# githook-companion rules
+.githook-companion/logs
+.githook-companion/bin
+.githook-companion/context
