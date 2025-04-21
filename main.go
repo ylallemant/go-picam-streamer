@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"embed"
 	"flag"
 	"fmt"
 	"mime/multipart"
@@ -22,6 +23,9 @@ import (
 var (
 	frames <-chan []byte
 )
+
+//go:embed static
+var staticFiles embed.FS
 
 func imageServ(w http.ResponseWriter, req *http.Request) {
 	mimeWriter := multipart.NewWriter(w)
@@ -65,6 +69,9 @@ func main() {
 	port := "9090"
 	binding := "0.0.0.0"
 	devName := "/dev/video0"
+
+	fileserver := http.FileServer(http.Dir("./static"))
+
 	flag.StringVar(&devName, "d", devName, "device name (path)")
 	flag.StringVar(&port, "p", port, "webcam service port")
 	flag.StringVar(&binding, "b", binding, "dinding address")
@@ -91,12 +98,7 @@ func main() {
 	frames = camera.GetOutput()
 
 	log.Info().Msgf("Serving images: [%s/stream]", fmt.Sprintf("%s:%s", binding, port))
-	http.HandleFunc("/", hello)
+	http.Handle("/", fileserver)
 	http.HandleFunc("/stream", imageServ)
 	log.Fatal().Msgf("%s", http.ListenAndServe(fmt.Sprintf("%s:%s", binding, port), nil))
-}
-
-func hello(w http.ResponseWriter, req *http.Request) {
-	log.Info().Msgf("hello handler: %s", req.URL.Path[1:])
-	fmt.Fprintf(w, "Hello, %s!", req.URL.Path[1:])
 }
