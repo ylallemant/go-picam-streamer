@@ -6,6 +6,7 @@ toolchain go1.23.8
 
 require (
 	github.com/go-git/go-git/v5 v5.16.0
+	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
 	github.com/google/go-github/v70 v70.0.0
 	github.com/pkg/errors v0.9.1
 	github.com/rs/zerolog v1.34.0
@@ -13,6 +14,7 @@ require (
 	github.com/spf13/pflag v1.0.6
 	github.com/stretchr/testify v1.10.0
 	github.com/vladimirvivien/go4vl v0.0.5
+	golang.org/x/image v0.26.0
 )
 
 require (

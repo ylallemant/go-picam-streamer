@@ -48,6 +48,11 @@ github.com/go-git/go-git/v5/storage/memory
 github.com/go-git/go-git/v5/utils/binary
 github.com/go-git/go-git/v5/utils/ioutil
 github.com/go-git/go-git/v5/utils/trace
+# github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
+## explicit
+github.com/golang/freetype
+github.com/golang/freetype/raster
+github.com/golang/freetype/truetype
 # github.com/golang/groupcache v0.0.0-20241129210726-2c02b8208cf8
 ## explicit; go 1.20
 github.com/golang/groupcache/lru
@@ -120,6 +125,10 @@ golang.org/x/crypto/ssh
 golang.org/x/crypto/ssh/agent
 golang.org/x/crypto/ssh/internal/bcrypt_pbkdf
 golang.org/x/crypto/ssh/knownhosts
+# golang.org/x/image v0.26.0
+## explicit; go 1.23.0
+golang.org/x/image/font
+golang.org/x/image/math/fixed
 # golang.org/x/net v0.39.0
 ## explicit; go 1.23.0
 golang.org/x/net/context

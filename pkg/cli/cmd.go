@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/ylallemant/go-picam-streamer/pkg/cli/binary/upgrade"
 	"github.com/ylallemant/go-picam-streamer/pkg/cli/binary/version"
+	"github.com/ylallemant/go-picam-streamer/pkg/cli/start"
 )
 
 var rootCmd = &cobra.Command{
@@ -23,6 +24,7 @@ var rootCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(upgrade.Command())
 	rootCmd.AddCommand(version.Command())
+	rootCmd.AddCommand(start.Command())
 }
 
 func Command() *cobra.Command {

@@ -21,7 +21,7 @@ func main() {
 		return strings.ToUpper(fmt.Sprintf("| %-6s|", i))
 	}
 
-	zerolog.SetGlobalLevel(zerolog.FatalLevel)
+	zerolog.SetGlobalLevel(zerolog.InfoLevel)
 
 	zerolog.CallerMarshalFunc = func(pc uintptr, file string, line int) string {
 		// TODO find a solution for bad output "../../../../../../../../pkg/nlp/tokenizer.go:229"
