@@ -5,14 +5,20 @@ go-picam-stream
 
 ### Installation
 
+#### Latest
 ```sh
 curl -fsSL https://github.com/ylallemant/go-picam-streamer/raw/main/install.sh | bash
+```
+
+#### Specific Version
+```sh
+curl -fsSL https://github.com/ylallemant/go-picam-streamer/raw/main/install.sh | bash -s -- --version="<version>"
 ```
 
 ### Upgrade
 
 ```sh
-githook-companion upgrade [--force]
+picam-streamer upgrade [--force]
 ```
 
 ## What could be the plan
