@@ -16,17 +16,17 @@ import (
 	"github.com/ylallemant/go-picam-streamer/pkg/camera"
 )
 
-func New() (*server, error) {
+func New(serverOptions *api.ServerOptions, cameraOptions *api.CameraOption) (*server, error) {
 	svr := new(server)
 	svr.mux = http.NewServeMux()
-	svr.port = "8080"
-	svr.binding = "0.0.0.0"
+	svr.port = serverOptions.Port
+	svr.binding = serverOptions.Address
 
 	ctx, cancel := context.WithCancel(context.Background())
 	svr.ctx = ctx
 	svr.cancelFunc = cancel
 
-	cam, err := camera.New(svr.ctx)
+	cam, err := camera.New(svr.ctx, cameraOptions)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to open camera device")
 	}
@@ -87,6 +87,7 @@ func (i *server) imageServ(w http.ResponseWriter, req *http.Request) {
 
 	var frame []byte
 	for frame = range i.frames {
+		log.Trace().Msgf("process frame")
 		partWriter, err := mimeWriter.CreatePart(partHeader)
 		if err != nil {
 			log.Printf("failed to create multi-part writer: %s", err)

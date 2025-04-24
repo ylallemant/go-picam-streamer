@@ -12,11 +12,15 @@ import (
 	"github.com/ylallemant/go-picam-streamer/pkg/api"
 )
 
-func Device(ctx context.Context) (*device.Device, error) {
+func Device(ctx context.Context, options *api.CameraOption) (*device.Device, error) {
 	cam, err := device.Open(
 		api.DefaultDevice,
 		//device.WithPixFormat(v4l2.PixFormat{PixelFormat: v4l2.PixelFmtMJPEG, Width: 640, Height: 480}),
-		device.WithPixFormat(v4l2.PixFormat{PixelFormat: v4l2.PixelFmtMJPEG, Width: 960, Height: 520}),
+		device.WithPixFormat(v4l2.PixFormat{
+			PixelFormat: v4l2.PixelFmtMJPEG,
+			Width:       options.CaptureWidth,
+			Height:      options.CaptureHeight,
+		}),
 	)
 	if err != nil {
 		return nil, errors.Wrapf(err, "failed to open camera device %s", api.DefaultDevice)

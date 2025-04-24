@@ -11,3 +11,8 @@ type Camera interface {
 type Device interface {
 	GetOutput() <-chan []byte
 }
+
+type CameraOption struct {
+	CaptureHeight int
+	CaptureWidth  int
+}

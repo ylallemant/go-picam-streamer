@@ -24,7 +24,7 @@ import (
 
 const fontPath = "./pkg/camera/UbuntuMono-R.ttf"
 
-func Device(ctx context.Context) (*mock, error) {
+func Device(ctx context.Context, options *api.CameraOption) (*mock, error) {
 	instance := new(mock)
 
 	instance.backgroundColor = color.RGBA{R: 0x30, G: 0x0a, B: 0x24, A: 0xff}
@@ -61,7 +61,7 @@ func Device(ctx context.Context) (*mock, error) {
 				fg := image.NewUniform(instance.fontColor)
 				bg := image.NewUniform(instance.backgroundColor)
 
-				rgba := image.NewRGBA(image.Rect(0, 0, 1200, 630))
+				rgba := image.NewRGBA(image.Rect(0, 0, options.CaptureWidth, options.CaptureWidth))
 				draw.Draw(rgba, rgba.Bounds(), bg, image.Pt(0, 0), draw.Src)
 
 				text := freetype.NewContext()

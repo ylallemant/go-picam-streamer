@@ -17,10 +17,10 @@ type Globals struct {
 func ProcessGlobals() {
 	if Current.Debug {
 		zerolog.SetGlobalLevel(zerolog.TraceLevel)
-	}
-
-	if Current.LogLevel != "" {
+	} else if Current.LogLevel != "" {
 		switch Current.LogLevel {
+		case "info":
+			zerolog.SetGlobalLevel(zerolog.InfoLevel)
 		default:
 			zerolog.SetGlobalLevel(zerolog.FatalLevel)
 		}

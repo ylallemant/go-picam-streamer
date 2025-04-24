@@ -7,10 +7,10 @@ import (
 	"github.com/ylallemant/go-picam-streamer/pkg/api"
 )
 
-func New(ctx context.Context) (*camera, error) {
+func New(ctx context.Context, options *api.CameraOption) (*camera, error) {
 	instance := new(camera)
 
-	cam, err := Device(ctx)
+	cam, err := Device(ctx, options)
 	if err != nil {
 		return nil, errors.Wrapf(err, "failed to initialise camera device %s", api.DefaultDevice)
 	}
