@@ -102,6 +102,8 @@ if command -v $exe_name >/dev/null; then
   else
     echo "local $local_version and wanted $version diverge, start installation"
   fi
+else
+  echo "no local installation found, proceed with installation"
 fi
 
 downloadFolder="${TMPDIR:-/tmp}"
@@ -110,6 +112,8 @@ os=$(get_os)
 arch=$(get_arch)
 file_name="${exe_name}${separator}${version}${separator}${os}${separator}${arch}.tar.gz" # the file name should be download
 downloaded_file="${downloadFolder}/${file_name}" # the file path should be download
+
+echo "binary archive for OS=$os and ARCH=$ach will be requested"
 
 mkdir -p $absolute_executable_folder
 
