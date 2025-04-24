@@ -1,6 +1,19 @@
 go-picam-stream
 ====
 
+## Binary
+
+### Installation
+
+```sh
+curl -fsSL https://github.com/ylallemant/go-picam-streamer/raw/main/install.sh | bash
+```
+
+### Upgrade
+
+```sh
+githook-companion upgrade [--force]
+```
 
 ## What could be the plan
 
