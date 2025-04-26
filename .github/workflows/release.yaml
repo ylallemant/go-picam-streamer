@@ -18,6 +18,12 @@ jobs:
         goos: [linux, windows, darwin]
         goarch: ["386", amd64, arm, arm64]
         exclude:
+          - goarch: "386"
+            goos: linux
+          - goarch: arm64
+            goos: linux
+          - goarch: arm
+            goos: linux
           - goarch: arm
             goos: darwin
           - goarch: "386"
@@ -27,8 +33,18 @@ jobs:
           - goarch: arm64
             goos: windows
     steps:
+    - name: Install Dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y build-essential libv4l-dev
+    
     - uses: actions/checkout@v4
 
+    - name: Install Dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y build-essential libv4l-dev
+    
     - name: ensure vendor files
       run: go mod tidy && go mod vendor
 
@@ -36,11 +52,13 @@ jobs:
     #   run: ls -al vendor/github.com/pemistahl/lingua-go
     
     - uses: wangyoucao577/go-release-action@v1
+      env:
+        CGO_ENABLED: 1
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         goos: ${{ matrix.goos }}
         goarch: ${{ matrix.goarch }}
-        goversion: "1.23"
+        goversion: "1.24"
         project_path: "./cmd/picam-streamer"
         binary_name: "picam-streamer"
         ldflags: -X github.com/ylallemant/go-picam-streamer/pkg/binary.repository=${{github.repositoryUrl}} -X github.com/ylallemant/go-picam-streamer/pkg/binary.gitCommitHash=${{github.sha}} -X github.com/ylallemant/go-picam-streamer/pkg/binary.semverVersion=${{ github.ref_name }}
